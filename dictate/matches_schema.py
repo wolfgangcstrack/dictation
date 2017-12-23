@@ -23,16 +23,20 @@ def matches_schema(dict_to_validate, schema):
     for field in schema:
         schema_type = schema[field]
         actual_value = dict_to_validate.get(field)
+
         if isinstance(schema_type, dict):
-            return _matches_nested_types(actual_value, schema_type)
-        if isinstance(schema_type, list):
-            return _matches_list_with_types(actual_value, schema_type)
-        if not _matches_type(actual_value, schema_type):
+            if not _matches_dict(actual_value, schema_type):
+                return False
+        elif isinstance(schema_type, list):
+            if not _matches_list(actual_value, schema_type):
+                return False
+        elif not _matches_type(actual_value, schema_type):
             return False
+
     return True
 
 
-def _matches_nested_types(value_dict, schema_type_dict):
+def _matches_dict(value_dict, schema_type_dict):
     """ Helper function for validating nested fields.
 
     Essentially, this recursively calls matches_schema as long as value_dict is
@@ -51,7 +55,7 @@ def _matches_nested_types(value_dict, schema_type_dict):
     return matches_schema(value_dict, schema_type_dict)
 
 
-def _matches_list_with_types(value_list, schema_type_list):
+def _matches_list(value_list, schema_type_list):
     """ Helper function for validating value_list against list_with_types.
 
     Parameters
