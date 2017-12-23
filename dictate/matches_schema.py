@@ -23,6 +23,8 @@ def matches_schema(dict_to_validate, schema):
     for field in schema:
         schema_type = schema[field]
         actual_value = dict_to_validate.get(field)
+        if isinstance(schema_type, dict):
+            return _matches_nested_types(actual_value, schema_type)
         if isinstance(schema_type, list):
             return _matches_list_with_types(actual_value, schema_type)
         if not _matches_type(actual_value, schema_type):
@@ -30,34 +32,53 @@ def matches_schema(dict_to_validate, schema):
     return True
 
 
-def _matches_list_with_types(value_list, list_with_types):
+def _matches_nested_types(value_dict, schema_type_dict):
+    """ Helper function for validating nested fields.
+
+    Essentially, this recursively calls matches_schema as long as value_dict is
+    indeed an instance of dict.
+
+    Parameters
+    ----------
+    value_dict : dict
+        The value to validate against schema_type_dict.
+    schema_type_dict : dict
+        The dict of schema types (which may also be nested dicts) that
+        value_dict will be validated against.
+    """
+    if not isinstance(value_dict, dict):
+        return False
+    return matches_schema(value_dict, schema_type_dict)
+
+
+def _matches_list_with_types(value_list, schema_type_list):
     """ Helper function for validating value_list against list_with_types.
 
     Parameters
     ----------
-    value_list
+    value_list : list
         The value_list to check against list_with_types.
-    list_with_types : list
+    schema_type_list : list
         A list of types for which all elements in value_list should be one of.
     """
     if not isinstance(value_list, list):
         return False
     for value in value_list:
-        if not any([_matches_type(value, given_type) for given_type in list_with_types]):
+        if not any([_matches_type(value, given_type) for given_type in schema_type_list]):
             return False
     return True
 
 
-def _matches_type(value, given_type):
+def _matches_type(value, schema_type):
     """ Helper function for validating value against given_type.
 
     Parameters
     ----------
     value
         The value to check against given_type.
-    given_type
+    schema_type
         The type for checking value against.
     """
-    if given_type is None:
+    if schema_type is None:
         return value is None
-    return isinstance(value, given_type)
+    return isinstance(value, schema_type)
