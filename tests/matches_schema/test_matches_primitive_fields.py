@@ -21,6 +21,23 @@ def primitive_schema():
     }
 
 
+def test_matches_none_field():
+    """ Test that matches_schema matches against a field that should be None.
+    """
+    # if field exists and is None, matches_schema returns True
+    dict_to_validate = {'none_field': None}
+    schema = {'none_field': None}
+    assert matches_schema(dict_to_validate, schema)
+
+    # if field exists and is not None, matches_schema returns False
+    dict_to_validate = {'none_field': 'not None'}
+    assert not matches_schema(dict_to_validate, schema)
+
+    # if field does not exist, matches_schema returns True
+    dict_to_validate = {}
+    assert matches_schema(dict_to_validate, schema)
+
+
 def test_matches_primitive_field():
     """ Tests that matches_schema matches against a single primitive field.
     """
