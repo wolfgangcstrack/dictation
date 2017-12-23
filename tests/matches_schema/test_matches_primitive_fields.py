@@ -45,8 +45,8 @@ def test_matches_primitive_field():
     schema = {'single_primitive_field': bool}
     assert matches_schema(dict_to_validate, schema)
 
-    dict_to_invalidate = {'single_primitive_field': 'not a bool'}
-    assert not matches_schema(dict_to_invalidate, schema)
+    invalid_dict = {'single_primitive_field': 'not a bool'}
+    assert not matches_schema(invalid_dict, schema)
 
 
 def test_matches_primitive_fields(primitive_schema):

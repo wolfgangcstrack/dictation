@@ -16,15 +16,9 @@ def list_with_varied_types_schema():
     }
 
 
-def test_matches_list_of_varied_types_field(list_with_varied_types_schema):
-    """ Tests that matches_schema works for a field that is a varied-type list.
-
-    Parameters
-    ----------
-    list_with_varied_types_schema : dict
-        See list_with_varied_types_schema above
-    """
-    dict_to_validate = {
+@fixture
+def valid_dict():
+    return {
         'list_field_with_varied_types': [
             True,
             datetime.now(),
@@ -34,9 +28,21 @@ def test_matches_list_of_varied_types_field(list_with_varied_types_schema):
             '5',
         ]
     }
-    assert matches_schema(dict_to_validate, list_with_varied_types_schema)
 
-    dict_to_invalidate = {
+
+def test_matches_list_of_varied_types_field(valid_dict, list_with_varied_types_schema):
+    """ Tests that matches_schema works for a field that is a varied-type list.
+
+    Parameters
+    ----------
+    valid_dict : dict
+        See valid_dict fixture above
+    list_with_varied_types_schema : dict
+        See list_with_varied_types_schema fixture above
+    """
+    assert matches_schema(valid_dict, list_with_varied_types_schema)
+
+    invalid_dict = {
         'list_field_with_varied_types': 'this is not a list',
     }
-    assert not matches_schema(dict_to_invalidate, list_with_varied_types_schema)
+    assert not matches_schema(invalid_dict, list_with_varied_types_schema)
