@@ -30,8 +30,12 @@ def matches_schema(dict_to_validate, schema):
         elif isinstance(schema_type, list):
             if not _matches_list(actual_value, schema_type):
                 return False
-        elif not _matches_type(actual_value, schema_type):
-            return False
+        elif isinstance(schema_type, tuple):
+            if not _matches_tuple(actual_value, schema_type):
+                return False
+        else:
+            if not _matches_type(actual_value, schema_type):
+                return False
 
     return True
 
@@ -71,6 +75,20 @@ def _matches_list(value_list, schema_type_list):
         if not any([_matches_type(value, given_type) for given_type in schema_type_list]):
             return False
     return True
+
+
+def _matches_tuple(value, schema_type_tuple):
+    """ Helper function for validating value_list against list_with_types.
+
+    Parameters
+    ----------
+    value
+        The value to check against schema_type_tuple.
+    schema_type_tuple : tuple
+        A tuple of types for which value should be one of. If None is included,
+        value may be passed in as None as well.
+    """
+    return any([_matches_type(value, schema_type) for schema_type in schema_type_tuple])
 
 
 def _matches_type(value, schema_type):
