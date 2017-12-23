@@ -32,7 +32,8 @@ def comprehensive_schema():
         'optional field': (bool, None),
         'varied-type field': (bool, int),
         'varied-type optional field': (bool, int, None),
-        # Special special case!!!
+        # Special special cases!!!
+        'functionally validated field': lambda v: bool(v),
         'object field with nested fields to be checked': {
             'nested required field': int,
             'nested optional field': (int, None),

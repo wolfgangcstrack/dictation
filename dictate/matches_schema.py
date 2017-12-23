@@ -33,6 +33,9 @@ def matches_schema(dict_to_validate, schema):
         elif isinstance(schema_type, tuple):
             if not _matches_tuple(actual_value, schema_type):
                 return False
+        elif not isinstance(schema_type, type) and callable(schema_type):
+            if not schema_type(actual_value):
+                return False
         else:
             if not _matches_type(actual_value, schema_type):
                 return False
