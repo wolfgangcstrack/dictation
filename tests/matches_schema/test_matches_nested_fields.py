@@ -10,7 +10,7 @@ from dictate import matches_schema
 
 
 @fixture
-def schema_with_nested_fields():
+def nested_fields_schema():
     return {
         'non_nested_field': bool,
         'nested_fields': {
@@ -56,7 +56,7 @@ def invalid_dict():
     }
 
 
-def test_matches_nested_fields(valid_dict, invalid_dict, schema_with_nested_fields):
+def test_matches_nested_fields(valid_dict, invalid_dict, nested_fields_schema):
     """ Tests that matches_schema returns true for the given parameters.
 
     Parameters
@@ -65,8 +65,8 @@ def test_matches_nested_fields(valid_dict, invalid_dict, schema_with_nested_fiel
         See fixture above.
     invalid_dict : dict
         See fixture above.
-    schema_with_nested_fields : dict
+    nested_fields_schema : dict
         See fixture above.
     """
-    assert matches_schema(valid_dict, schema_with_nested_fields)
-    assert not matches_schema(invalid_dict, schema_with_nested_fields)
+    assert matches_schema(valid_dict, nested_fields_schema)
+    assert not matches_schema(invalid_dict, nested_fields_schema)
