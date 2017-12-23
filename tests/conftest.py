@@ -19,19 +19,19 @@ def comprehensive_schema():
     """
     return {
         # Some primitive test fields
-        'bool field': bool,
-        'datetime field': datetime,
-        'float field': float,
-        'int field': int,
-        'list field': list,
-        'str field': str,
+        'bool_field': bool,
+        'datetime_field': datetime,
+        'float_field': float,
+        'int_field': int,
+        'list_field': list,
+        'str_field': str,
         # Special cases
         'field that should not be defined': None,
         'list of elements of only one type': [bool],
         'list of elements of varied types': [bool, int],
-        'optional field': (bool, None),
-        'varied-type field': (bool, int),
-        'varied-type optional field': (bool, int, None),
+        'optional_field': (bool, None),
+        'varied_type_field': (bool, int),
+        'varied_type_optional_field': (bool, int, None),
         # Special special cases!!!
         'functionally validated field': lambda v: bool(v),
         'object field with nested fields to be checked': {
