@@ -1,12 +1,12 @@
 """ test_matches_nested_fields.py
 
-Tests the dictate.matches_schema function for nested schema fields.
+Tests the dictation.matches_schema function for nested schema fields.
 """
 
 from datetime import datetime
 from pytest import fixture
 
-from dictate import matches_schema
+from dictation import matches_schema
 
 
 @fixture

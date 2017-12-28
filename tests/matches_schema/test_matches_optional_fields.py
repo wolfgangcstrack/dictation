@@ -1,12 +1,12 @@
 """ test_matches_optional_fields.py
 
-Tests the dictate.matches_schema function for fields that are optional.
+Tests the dictation.matches_schema function for fields that are optional.
 """
 
 from datetime import datetime
 from pytest import fixture
 
-from dictate import matches_schema
+from dictation import matches_schema
 
 
 @fixture

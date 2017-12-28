@@ -1,17 +1,17 @@
-# dictate
-`dictate` is a python module for validating dictionaries based on pre-defined schemas. The need for
+# dictation
+`dictation` is a python module for validating dictionaries based on pre-defined schemas. The need for
 something like this arose from the need to validate
 [pymongo](https://api.mongodb.com/python/current/) documents in a clean, functional way. ORMs and
 ORM-like modules would not fit this requirement due to extra overhead in both execution time and
 setup time.
 
-`dictate`'s *schema* structure and validation was inspired by
+`dictation`'s *schema* structure and validation was inspired by
 [Meteor.js' check function](https://docs.meteor.com/api/check.html).
 
 # Usage
 ```python
 from datetime import datetime
-import dictate
+import dictation
 
 sample_schema = {
     # Primitive top-level fields in the dict to validate
@@ -65,7 +65,7 @@ valid_dict = {
     'extra field not in schema': bool(float(int(str(42)))),  # can comment and will still be valid
 }
 
-dictate.matches_schema(valid_dict, sample_schema)  # returns True
+dictation.matches_schema(valid_dict, sample_schema)  # returns True
 ```
 
 The `sample_schema` above also serves as a reference for what any other schema can contain.

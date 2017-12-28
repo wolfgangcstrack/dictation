@@ -1,6 +1,6 @@
 """ test_comprehensive_schema.py
 
-Tests dictate.matches_schema against the comprehensive_schema fixture. This
+Tests dictation.matches_schema against the comprehensive_schema fixture. This
 fixture includes all schema field types for validating a dict and is located
 in 'tests/conftest.py'.
 """
@@ -9,7 +9,7 @@ from datetime import datetime
 from pytest import fixture
 from random import random
 
-from dictate import matches_schema
+from dictation import matches_schema
 
 
 @fixture

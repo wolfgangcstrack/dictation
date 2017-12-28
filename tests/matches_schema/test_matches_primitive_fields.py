@@ -1,12 +1,12 @@
 """ test_matches_schema.py
 
-Tests the dictate.matches_schema function for primitive types.
+Tests the dictation.matches_schema function for primitive types.
 """
 
 from datetime import datetime
 from pytest import fixture
 
-from dictate import matches_schema
+from dictation import matches_schema
 
 
 @fixture
