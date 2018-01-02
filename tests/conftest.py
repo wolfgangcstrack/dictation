@@ -30,7 +30,7 @@ def comprehensive_schema():
         'list of elements of only one type': [bool],
         'list of elements of varied types': [bool, int],
         'optional_field': (bool, None),
-        'varied_type_field': (bool, int),
+        'varied_type_field': (bool, [int]),
         'varied_type_optional_field': (bool, int, None),
         # Special special cases!!!
         'functionally validated field': lambda v: bool(v),

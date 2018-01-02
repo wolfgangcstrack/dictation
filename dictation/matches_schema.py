@@ -106,4 +106,6 @@ def _matches_type(value, schema_type):
     """
     if schema_type is None:
         return value is None
+    if isinstance(schema_type, list):
+        return _matches_list(value, schema_type)
     return isinstance(value, schema_type)

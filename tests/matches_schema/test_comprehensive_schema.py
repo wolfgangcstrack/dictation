@@ -25,7 +25,7 @@ def valid_dict():
         'list of elements of only one type': [True, False],
         'list of elements of varied types': [True, 1, False, 0],
         # 'optional_field': False,  # can be commented/uncommented out and still be valid
-        'varied_type_field': int(bool(42)),
+        'varied_type_field': [int(bool(42))],
         # 'varied_type_optional_field': bool(int('42')),  # can be commented/uncommented out and still be valid
         'functionally validated field': True,
         'object field with nested fields to be checked': {
